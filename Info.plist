@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>BluetoothAudioReceiver</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.example.BluetoothAudioReceiver</string>
+    <key>CFBundleName</key>
+    <string>BluetoothAudioReceiver</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <!-- This key is required on modern versions of macOS to access Bluetooth.
+         You should tailor the message to explain why your app needs Bluetooth
+         access. -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>This app needs access to Bluetooth to manage device connections.</string>
+</dict>
+</plist>
