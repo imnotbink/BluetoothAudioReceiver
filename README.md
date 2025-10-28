@@ -29,6 +29,43 @@ When the window appears it will show any devices you have already paired with yo
 ### Compiling a binary
 
 If you prefer to compile a standalone binary you can invoke the Swift compiler directly:
+To build a conventional macOS app you have two options:
+
+### Use the included sample project
+
+
+## Building with Xcode
+
+
+To build a conventional macOS app you have two options:
+
+repository now contains a `mac_app` directory with a minimal SwiftUI application. It defines `BluetoothViewModel`, `ContentView` and `DeviceRow` as separate files and an `@main` entry point in `BluetoothAudioReceiverApp.swift`. It also includes a sample `Info.plist` with an `NSBluetoothAlwaysUsageDescription` key.
+
+To use this approach:
+
+1. Open Xcode and select **File → Open…**, then choose the `mac_app` folder. Xcode will recognise it as a Swift package and display the files.
+2. Create a new **macOS App** target if one isn't created automatically. Add the files from `mac_app` to your target.
+3. Under **Frameworks, Libraries, and Embedded Content** add **IOBluetooth.framework** so the Bluetooth APIs link correctly.
+4. Create an `.entitlements` file and enable `com.apple.security.device.bluetooth` so that `IOBluetoothDevice.pairedDevices()` returns your paired devices【966307550843165†L253-L259】.
+5. Edit the bundle identifier in `Info.plist` as appropriate for your team; keep the `NSBluetoothAlwaysUsageDescription` key and customise the message shown to users.
+6. Build and run the app. It will behave the same as the script but appears as a fully fledged macOS application.
+
+### Create a project manually
+
+Alternatively you can start from scratch. Create a new **macOS App** project using Swift and SwiftUI and then copy the code from this repository into your new target:
+
+1.11. Add the `IOBluetooth.framework` under **Frameworks, Libraries, and Embedded Content**.
+2. Replace the content of your automatically generated `ContentView` with the implementation found in this repository.
+3. Add a new Swift file (`BluetoothViewModel.swift`) and copy the `BluetoothViewModel` class.
+4. Include the `DeviceRow` struct in its own Swift file or copy the `DeviceRow` implementation.
+5. Create an `.entitlements` file enabling `com.apple.security.device.bluetooth` and attach it to the target.
+6. Add the `NSBluetoothAlwaysUsageDescription` key to your `Info.plist` with a message explaining why the app uses Bluetooth.Include the `DeviceRow` struct in its own Swift file or copy the `DeviceRow` implementation.
+5. Create an `.entitlements` file enabling `com.apple.security.device.bluetooth` and attach it to the target.
+6. Add the `NSBluetoothAlwaysUsageDescription` key to your `Info.plist` with a message explaining why the app uses Bluetooth.scription` key to your `Info.plist` with a message explaining why the app uses Bluetooth.its own Swift file or alongside `ContentView`.
+6. Create an `.entitlements` file enabling `com.apple.security.device.bluetooth` and attach it to the target.
+7. Add a `NSBluetoothAlwaysUsageDescription` key to your `Info.plist` explaining why you need Bluetooth.
+
+After these steps you can build and run the app from Xcode. The interface will be identical to the script version but signed and sandboxed according to your team configuration.
 
 ```bash
 swiftc -o BluetoothAudioReceiver BluetoothAudioReceiver.swift -framework IOBluetooth -framework AppKit -framework SwiftUI
@@ -37,17 +74,7 @@ swiftc -o BluetoothAudioReceiver BluetoothAudioReceiver.swift -framework IOBluet
 This will produce an executable named `BluetoothAudioReceiver` in the current directory. When you run it the window will behave the same as the script. You may need to codesign the binary with the Bluetooth entitlement if you want to distribute it outside of your local machine.
 
 ## Building with Xcode
-
-For a more conventional macOS application you can create a new *App* project in Xcode and copy the contents of `BluetoothAudioReceiver.swift` into the appropriate files:
-
-1. Create a new **macOS App** project using Swift and SwiftUI.
-2. Add the `IOBluetooth.framework` under **Frameworks, Libraries, and Embedded Content**.
-3. Replace the content of `ContentView.swift` with the `ContentView` implementation from this script.
-4. Add a new Swift file (`BluetoothViewModel.swift`) and copy the `BluetoothViewModel` class.
-5. Update your `Info.plist` with `NSBluetoothAlwaysUsageDescription` and a suitable message.
-6. Create an `.entitlements` file enabling `com.apple.security.device.bluetooth` and attach it to the target.
-
-After those steps you can build and run the app from Xcode. The interface will be identical to the script version but signed and sandboxed according to your team configuration.
+uration.
 
 ## Credits
 
